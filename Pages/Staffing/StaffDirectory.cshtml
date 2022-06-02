@@ -1,0 +1,77 @@
+﻿@page "{SearchString?}/{SearchCriteria?}/{SortOption?}/{SortDirection?}"
+@model ots.Pages.Staffing.StaffDirectoryModel
+@{
+    Layout = "_Layout";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-2">
+            <h2 class="txt-primary">Staff</h2>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="Search" />
+                <input class="form-control" type="text" placeholder="Search..." asp-for="SearchString" required/>
+                <br />
+                <select class="form-control" asp-for="SearchCriteria" required> 
+                    <option value="StaffId">Staff Id</option>
+                    <option value="FirstName">First Name</option>
+                    <option value="LastName">Last Name</option>
+                    <option value="PrimaryPhoneNumber">Primary Phone</option>
+                    <option value="SecondaryPhoneNumber">Secondary Phone</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <input type="submit" value="Search" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="Sort" />
+                <select class="form-control" asp-for="SortOption" required> 
+                    <option value="StaffId">Staff Id</option>
+                    <option value="FirstName">First Name</option>
+                    <option value="LastName">Last Name</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <select class="form-control" asp-for="SortDirection" required> 
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+                <br />
+                 <input type="submit" value="Sort List" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-2 text-end">
+            <a asp-page="AddNewStaff" class="btn btn-primary" style="width:150px">Add New Staff</a>
+            <br /><br />
+            <a asp-page="StaffDirectory" class="btn btn-danger" style="width:150px">Reset</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Primary Phone</th>
+                <th>Secondary Phone</th>
+                <th>Email Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var staff in Model.Staff)
+            {
+                <tr>
+                    <td>@staff.FirstName</td>
+                    <td>@staff.LastName</td>
+                    <td>@staff.PrimaryPhoneNumber</td>
+                    <td>@staff.SecondaryPhoneNumber</td>
+                    <td>@staff.EmailAddress</td>
+                    <td><a asp-page="StaffProfile" asp-route-Id="@staff.StaffId" class="btn btn-outline-success" style="width:100%">@staff.FirstName @staff.LastName Profile</a></td>
+                </tr> 
+            }
+        </tbody>
+    </table>
+</div>

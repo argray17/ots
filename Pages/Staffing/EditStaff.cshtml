@@ -1,0 +1,58 @@
+﻿@page "{Id:int}"
+@using ots.Models
+@model ots.Pages.Staffing.EditStaffModel
+@{
+        Layout = "_Layout";
+}
+
+<form method="post">
+    <input hidden asp-for="Staff.StaffId" />
+
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Editing Staff: @Model.Staff.GetFullName()</h2>
+            <hr/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.FirstName"></label>
+            <input class="form-control" asp-for="Staff.FirstName" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.LastName"></label>
+            <input class="form-control" asp-for="Staff.LastName" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.PrimaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Staff.PrimaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.SecondaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Staff.SecondaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.EmailAddress"></label>
+            <input class="form-control" asp-for="@Model.Staff.EmailAddress" type="email"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Staff.StreetAddress"></label>
+            <input class="form-control" asp-for="@Model.Staff.StreetAddress" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+             <div class="col">
+                   <label asp-for="Staff.CityAddress"></label>
+                <input class="form-control" asp-for="@Model.Staff.CityAddress" type="text"/>
+            </div>
+            <div class="col">
+                <label asp-for="Staff.StateAddress"></label>
+                <select class="form-control" asp-for="@Model.Staff.StateAddress" asp-items="Html.GetEnumSelectList<States>()"><option></option></select>
+            </div>
+            <div class="col">
+                <label asp-for="Staff.ZipCode"></label>
+                <input class="form-control" asp-for="@Model.Staff.ZipCode" type="text"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+    </div>
+</form>

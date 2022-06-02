@@ -1,0 +1,35 @@
+﻿@page "{Id:int}"
+@model ots.Pages.Staffing.StaffProfileModel
+@{
+        Layout = "_Layout";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="txt-primary">@Model.Staff.GetFullName()</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page="EditStaff" asp-route-Id="@Model.Staff.StaffId" class="btn btn-warning" style="width:175px">Edit Staff Member</a>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Staff Id</th>
+                <th>Primary Phone</th>
+                <th>Secondary Phone</th>
+                <th>Email Address</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Staff.StaffId</td>
+                <td>@Model.Staff.PrimaryPhoneNumber</td>
+                <td>@Model.Staff.SecondaryPhoneNumber</td>
+                <td>@Model.Staff.EmailAddress</td>
+                <td>@Model.Staff.GetFullAddress()</td>
+            </tr> 
+        </tbody>
+    </table>
+</div>

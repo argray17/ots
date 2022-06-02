@@ -1,0 +1,209 @@
+﻿@page "{SearchString?}/{SearchCriteria?}/{SortOption?}/{SortDirection?}"
+@model ots.Pages.Clients.ClientDirectoryModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-2">
+            <h2 class="txt-primary">Clients</h2>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SearchClients" />
+                <input class="form-control" type="text" placeholder="Search..." asp-for="SearchString" required/>
+                <br />
+                <select class="form-control" asp-for="SearchCriteria" required> 
+                    <option value="ClientId">Client Id</option>
+                    <option value="FirstName">First Name</option>
+                    <option value="LastName">Last Name</option>
+                    <option value="PrimaryPhoneNumber">Primary Phone</option>
+                    <option value="SecondaryPhoneNumber">Secondary Phone</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <input type="submit" value="Search" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SortClients" />
+                <select class="form-control" asp-for="SortOption" required> 
+                    <option value="ClientId">Client Id</option>
+                    <option value="FirstName">First Name</option>
+                    <option value="LastName">Last Name</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <select class="form-control" asp-for="SortDirection" required> 
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+                <br />
+                 <input type="submit" value="Sort List" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-2 text-end">
+            <a asp-page="AddNewClient" class="btn btn-primary" style="width:150px">Add New Client</a>
+            <br /><br />
+            <a asp-page="ClientDirectory" class="btn btn-danger" style="width:150px">Reset</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Primary Phone</th>
+                <th>Secondary Phone</th>
+                <th>Email Address</th>
+                <th>Client Profille</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var Client in Model.Clients)
+            {
+                <tr>
+                    <td>@Client.FirstName</td>
+                    <td>@Client.LastName</td>
+                    <td>@Client.PrimaryPhoneNumber</td>
+                    <td>@Client.SecondaryPhoneNumber</td>
+                    <td>@Client.EmailAddress</td>
+                    <td><a asp-page="ClientProfile" asp-route-Id="@Client.ClientId" class="btn btn-outline-success" style="width:100%">@Client.FirstName @Client.LastName Profile</a></td>
+                </tr> 
+            }
+        </tbody>
+    </table>
+</div>
+<br /><br /><br /><br /><br /><br />
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-2">
+            <h2 class="txt-primary">Businesses</h2>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SearchBusinesses" />
+                <input class="form-control" type="text" placeholder="Search..." asp-for="SearchString" required/>
+                <br />
+                <select class="form-control" asp-for="SearchCriteria" required> 
+                    <option value="BusinessId">Business Id</option>
+                    <option value="BusinessName">Business Name</option>
+                    <option value="PrimaryPhoneNumber">Primary Phone</option>
+                    <option value="SecondaryPhoneNumber">Secondary Phone</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <input type="submit" value="Search" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SortBusinesses" />
+                <select class="form-control" asp-for="SortOption" required> 
+                    <option value="BusinessId">Business Id</option>
+                    <option value="BusinessName">Business Name</option>
+                    <option value="EmailAddress">Email Address</option>
+                </select>
+                <br />
+                <select class="form-control" asp-for="SortDirection" required> 
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+                <br />
+                 <input type="submit" value="Sort List" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-2 text-end">
+            <a asp-page="AddNewBusiness" class="btn btn-primary" style="width:150px">Add New Business</a>
+            <br /><br />
+            <a asp-page="ClientDirectory" class="btn btn-danger" style="width:150px">Reset</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Business Name</th>
+                <th>Primary Phone</th>
+                <th>Secondary Phone</th>
+                <th>Email Address</th>
+                <th>Client Profille</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var Business in Model.Businesses)
+            {
+                <tr>
+                    <td>@Business.BusinessName</td>
+                    <td>@Business.PrimaryPhoneNumber</td>
+                    <td>@Business.SecondaryPhoneNumber</td>
+                    <td>@Business.EmailAddress</td>
+                    <td><a asp-page="ClientProfile" asp-route-Id="@Business.BusinessId" class="btn btn-outline-success" style="width:100%">@Business.BusinessName Profile</a></td>
+                </tr> 
+            }
+        </tbody>
+    </table>
+</div>
+<br /><br /><br /><br /><br /><br />
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-2">
+            <h2 class="txt-primary">Familes</h2>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SearchFamily" />
+                <input class="form-control" type="text" placeholder="Search..." asp-for="SearchString" required/>
+                <br />
+                <select class="form-control" asp-for="SearchCriteria" required> 
+                    <option value="FammilyId">Family Id</option>
+                    <option value="FamilyName">Family Name</option>
+                </select>
+                <br />
+                <input type="submit" value="Search" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-4">
+            <form method="get">
+                <input type="hidden" name="handler" value="SortFamilies" />
+                <select class="form-control" asp-for="SortOption" required> 
+                    <option value="FammilyId">Family Id</option>
+                    <option value="FamilyName">Family Name</option>
+                </select>
+                <br />
+                <select class="form-control" asp-for="SortDirection" required> 
+                    <option value="Ascending">Ascending</option>
+                    <option value="Descending">Descending</option>
+                </select>
+                <br />
+                 <input type="submit" value="Sort List" class="btn btn-secondary" style="width:150px"/>
+            </form>
+        </div>
+        <div class="col-2 text-end">
+            <a asp-page="AddFamily" class="btn btn-primary" style="width:150px">Add New Family</a>
+            <br /><br />
+            <a asp-page="ClientDirectory" class="btn btn-danger" style="width:150px">Reset</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Family Name</th>
+                <th>Family Profille</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var Family in Model.Families)
+            {
+                <tr>
+                    <td>@Family.FamilyName</td>
+                    <td><a asp-page="ClientProfile" asp-route-Id="@Family.FamilyId" class="btn btn-outline-success" style="width:100%">@Family.FamilyName Profile</a></td>
+                </tr> 
+            }
+        </tbody>
+    </table>
+    <br /><br /><br /><br /><br /><br />
