@@ -1,0 +1,52 @@
+﻿@page
+@using ots.Models
+@model ots.Pages.Clients.AddNewBusinessModel
+@{
+    Layout = "_Layout";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Add New Business</h2>
+            <hr/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Business.BusinessName"></label>
+            <input class="form-control" asp-for="Business.BusinessName" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Business.PrimaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Business.PrimaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Business.SecondaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Business.SecondaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Business.EmailAddress"></label>
+            <input class="form-control" asp-for="Business.EmailAddress" type="email"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Business.StreetAddress"></label>
+            <input class="form-control" asp-for="@Model.Business.StreetAddress" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+             <div class="col">
+                   <label asp-for="Business.CityAddress"></label>
+                <input class="form-control" asp-for="@Model.Business.CityAddress" type="text"/>
+            </div>
+            <div class="col">
+                <label asp-for="Business.StateAddress"></label>
+                <select class="form-control" asp-for="@Model.Business.StateAddress" asp-items="Html.GetEnumSelectList<States>()"><option></option></select>
+            </div>
+            <div class="col">
+                <label asp-for="Business.ZipCode"></label>
+                <input class="form-control" asp-for="@Model.Business.ZipCode" type="text"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Add</button>
+    </div>
+</form>

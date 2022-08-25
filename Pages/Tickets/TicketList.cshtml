@@ -1,0 +1,76 @@
+﻿@page
+@model ots.Pages.Tickets.TicketListModel
+@{
+    Layout = "_Layout";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="txt-primary">Tickets</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page="CreateTicket" class="btn btn-primary">Create New Ticket</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Ticket Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Client</th>
+                <th>Staff</th>
+                <th>Issue Type</th>
+                <th>Issue Priority</th>
+                <th>Ticket Page</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var ticket in Model.Tickets)
+            {
+                <tr>
+                    <td>@ticket.TicketId</td>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Description</td>
+                    @if (ticket.ClientId != null)
+                    {
+                        ticket.Business = Model.Businesses.First(b => b.BusinessId == ticket.BusinessId);
+                        <td>@ticket.Business.BusinessName</td>
+                    } else
+                    {
+                        <td></td>
+                    }
+                    @if (ticket.ClientId != null)
+                    {
+                        ticket.Client = Model.Clients.First(c => c.ClientId == ticket.ClientId);
+                        <td>@ticket.Client.GetFullName()</td>
+                    } else
+                    {
+                        <td></td>
+                    }
+                    @if (ticket.FamilyId != null)
+                    {
+                        ticket.Family = Model.Families.First(f => f.FamilyId == ticket.FamilyId);
+                        <td>@ticket.Family.FamilyName</td>
+                    } else
+                    {
+                        <td></td>
+                    }
+                    @if (ticket.StaffId != null)
+                    {
+                        ticket.Staff = Model.Staff.First(s => s.StaffId == ticket.StaffId);
+                        <td>@ticket.Staff.GetFullName()</td>
+                    } else
+                    {
+                        <td></td>
+                    }
+                    <td>@ticket.IssueType</td>
+                    <td>@ticket.IssuePriority</td>
+                    <td><a asp-page="TicketDetails" class="btn btn-outline-secondary">@ticket.Title Details</a></td>
+                </tr> 
+            }
+        </tbody>
+    </table>
+</div>

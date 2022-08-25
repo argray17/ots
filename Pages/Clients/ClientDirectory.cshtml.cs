@@ -62,6 +62,8 @@ namespace ots.Pages.Clients
                     Clients = _db.Clients;
                     break;
             }
+            Businesses = _db.Businesses;
+            Families = _db.Families;
         }
 
         public void OnGetSortClients()
@@ -88,6 +90,8 @@ namespace ots.Pages.Clients
                     Clients = _db.Clients;
                     break;
             }
+            Businesses = _db.Businesses;
+            Families = _db.Families;
         }
 
         public void OnGetSearchBusinesses()
@@ -113,6 +117,8 @@ namespace ots.Pages.Clients
                     Businesses = _db.Businesses;
                     break;
             }
+            Clients = _db.Clients;
+            Families = _db.Families;
         }
 
         public void OnGetSortBusinesses()
@@ -135,6 +141,8 @@ namespace ots.Pages.Clients
                     Businesses = _db.Businesses;
                     break;
             }
+            Clients = _db.Clients;
+            Families = _db.Families;
         }
 
         public void OnGetSearchFamilies()
@@ -151,6 +159,8 @@ namespace ots.Pages.Clients
                     Families = _db.Families;
                     break;
             }
+            Clients = _db.Clients;
+            Businesses = _db.Businesses;
         }
 
         public void OnGetSortFamilies()
@@ -169,6 +179,8 @@ namespace ots.Pages.Clients
                     Families = _db.Families;
                     break;
             }
+            Clients = _db.Clients;
+            Businesses = _db.Businesses;
         }
 
         public void OnGetReset()

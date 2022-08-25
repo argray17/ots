@@ -1,0 +1,56 @@
+﻿@page
+@using ots.Models
+@model ots.Pages.Clients.AddNewClientModel
+@{
+        Layout = "_Layout";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary pl-3">Add New Client</h2>
+            <hr/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.FirstName"></label>
+            <input class="form-control" asp-for="Client.FirstName" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.LastName"></label>
+            <input class="form-control" asp-for="Client.LastName" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.PrimaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Client.PrimaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.SecondaryPhoneNumber"></label>
+            <input class="form-control" asp-for="Client.SecondaryPhoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel"/>
+            <small>Format: 123-456-7890</small>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.EmailAddress"></label>
+            <input class="form-control" asp-for="@Model.Client.EmailAddress" type="email"/>
+        </div>
+        <div class="form-group row mb-3">
+            <label asp-for="Client.StreetAddress"></label>
+            <input class="form-control" asp-for="@Model.Client.StreetAddress" type="text"/>
+        </div>
+        <div class="form-group row mb-3">
+             <div class="col">
+                   <label asp-for="Client.CityAddress"></label>
+                <input class="form-control" asp-for="@Model.Client.CityAddress" type="text"/>
+            </div>
+            <div class="col">
+                <label asp-for="Client.StateAddress"></label>
+                <select class="form-control" asp-for="@Model.Client.StateAddress" asp-items="Html.GetEnumSelectList<States>()"><option></option></select>
+            </div>
+            <div class="col">
+                <label asp-for="Client.ZipCode"></label>
+                <input class="form-control" asp-for="@Model.Client.ZipCode" type="text"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Add</button>
+    </div>
+</form>
